@@ -17,7 +17,7 @@ You need to have python3 installed and configured
  - Download the repository via git or zip
  - Install requirements: `pip install -r requirements.txt`
 
-Before running it, you need to modify a few thing:
+Before running it, you need to modify a few things:
 
  1. Add your email information: ![enter image description here](https://hugolb0.000webhostapp.com/ransom0_email.png)
 
