@@ -84,7 +84,7 @@ def FindFiles():
     while load_state != 'FINISHED':
         f = open("logs/path.txt", "a")
         cnt = 0
-        for root, files in os.walk("/"):
+        for root, dirs, files in os.walk("/"):
         # for root, files in os.walk("/YOUR/TESTING/DIRECTORY"):   
             for file in files:
                 if file.endswith(extensions):
