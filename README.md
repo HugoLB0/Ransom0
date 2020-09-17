@@ -29,6 +29,7 @@ Before running it, you need to modify a few things:
 
 ## To do:
  - [x] Add logs
+ - [ ] Exclude system files
  - [ ] Hide logs
  - [ ] Bypass Permission 
  - [ ] Automatically  show the message on startup
