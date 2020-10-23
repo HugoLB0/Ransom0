@@ -31,6 +31,7 @@ Before running it, you need to modify a few thing:
  - [x] Add logs
  - [x] Add filter to exclude system files
  - [ ] Hide logs
+ - [ ] Hide console
  - [ ] Bypass Permission 
  - [ ] Automatically  show the message on startup
  - [ ] Message in a GUI windows ?
