@@ -30,12 +30,13 @@ Before running it, you need to modify a few thing:
 ## To do:
  - [x] Add logs
  - [x] Add filter to exclude system files
+ - [x] Message in a GUI windows (Tkinter)
+ - [ ] !! Add a databases or server instead of mail (MariaDb, SQL ?) 
+ - [ ] !! Add a Web Interface ( Frontend: VueJs ? Backend: Django?) 
+ - [ ] !! Bypass permission / Privileges Escalation (WinPwnage)
  - [ ] Hide logs
- - [ ] Bypass Permission 
  - [ ] Automatically  show the message on startup
- - [x] Message in a GUI windows ?
- - [ ] Generate executable from .py file for ALL operating system
- - [ ] Store email credential in files ?
+ - [ ] Generate executable for all OS (pyinstaller)
 
 
 ## Testing
@@ -43,7 +44,7 @@ This Program have been test on:
 
  - **Windows 10**
  - **Mac OS Catalina 10.15.6 (19G73)**
-  - **Mac OS Big Sur 11.1 (20C69)**
+ - **Mac OS Big Sur 11.1 (20C69)**
 
 ## DISCLAMER 
 **THIS PROJECT IS FOR EDUCATION PURPOSE ONLY, DO NOT RUN IT WITHOUT PERMISSION!**
