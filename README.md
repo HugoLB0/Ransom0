@@ -1,7 +1,7 @@
 ## Ransom0
 Ransom0 is a open source ransomware made with Python, designed to find and encrypt user data. Instead of a real server, the encryption key will be send via email to your mail box.
 
-![Message displayed when user files are encrypted](https://hugolb0.000webhostapp.com/ransom0.png)
+![Message displayed when user files are encrypted](https://hugolb0.000webhostapp.com/ransom0_main.png)
 
 ## Program Structure:
 the program is organised  in **three main part**:
