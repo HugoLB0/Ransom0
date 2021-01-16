@@ -7,4 +7,4 @@ install:
 script:
   python test.py
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t 5a03afa7-23a4-45f1-b763-9623ca480a9c
