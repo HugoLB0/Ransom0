@@ -6,7 +6,5 @@ install:
   - pip install -r requirements.txt
 script:
   python test.py
-
 after_success:
-  CODECOV_TOKEN="5a03afa7-23a4-45f1-b763-9623ca480a9c"
   - bash <(curl -s https://codecov.io/bash)
