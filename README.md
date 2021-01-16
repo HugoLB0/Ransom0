@@ -1,4 +1,7 @@
+[![Build Status](https://api.travis-ci.com/hugolb0/ransom0.svg?branch=master)](https://travis-ci.com/hugolb0/ransom0)
+
 ## Ransom0
+
 Ransom0 is an open source ransomware made with Python, designed to find and encrypt user data. 
 ![Message displayed when user files are encrypted](https://hugolb0.000webhostapp.com/ransom0_main.png)
 
