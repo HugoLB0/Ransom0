@@ -1,3 +1,6 @@
 language: python
-rvm:
- - 3.8.7
+python:
+  - "3.8.7"
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
