@@ -3,8 +3,10 @@
 
 <p align="center">
  <img src='https://api.travis-ci.com/hugolb0/ransom0.svg?branch=master'>
- <img src='https://pyup.io/repos/github/HugoLB0/Ransom0/shield.svg'
- <img src='https://pyup.io/repos/github/HugoLB0/Ransom0/python-3-shield.svg'>
+ <img src='https://img.shields.io/github/release-date/HugoLB0/Ransom0'>
+ <img src='https://img.shields.io/github/commit-activity/m/HugoLB0/Ransom0'>
+ <img src='https://img.shields.io/github/last-commit/HugoLB0/Ransom0'>
+ 
 </p>
 <p align="center">
   Ransom0 is an open source ransomware made with Python, designed to find and encrypt user data. 
