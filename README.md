@@ -6,8 +6,9 @@
  <img src='https://img.shields.io/github/release-date/HugoLB0/Ransom0'>
  <img src='https://img.shields.io/github/commit-activity/m/HugoLB0/Ransom0'>
  <img src='https://img.shields.io/github/last-commit/HugoLB0/Ransom0'>
- 
 </p>
+ 
+ 
 <p align="center">
   Ransom0 is an open source ransomware made with Python, designed to find and encrypt user data. 
   <img src="https://hugolb0.000webhostapp.com/ransom0_main.png">
@@ -72,3 +73,5 @@ This Program have been test on:
 **THIS PROJECT IS FOR EDUCATION PURPOSE ONLY, DO NOT RUN IT WITHOUT PERMISSION!**
 **I AM NOT RESPONSIBLE FOR ANY DAMAGED CAUSED BY THE ILLEGAL USAGE OF THIS PROGRAM**
 
+## Stargazers
+ [![Stargazers repo roster for @USERNAME/REPO_NAME](https://reporoster.com/stars/HugoLB0/Ransom0)](https://github.com/HugoLB0/Ransom0/stargazers)
