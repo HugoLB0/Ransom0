@@ -5,8 +5,6 @@
  <img src='https://api.travis-ci.com/hugolb0/ransom0.svg?branch=master'>
  <img src='https://pyup.io/repos/github/HugoLB0/Ransom0/shield.svg'
  <img src='https://pyup.io/repos/github/HugoLB0/Ransom0/python-3-shield.svg'>
- <img src='https://app.fossa.com/api/projects/git%2Bgithub.com%2FHugoLB0%2FRansom0.svg?type=shield'>
- <img src='https://img.shields.io/github/downloads/HugoLb0/Ransom0/total.svg'>
 </p>
 <p align="center">
   Ransom0 is an open source ransomware made with Python, designed to find and encrypt user data. 
@@ -72,6 +70,3 @@ This Program have been test on:
 **THIS PROJECT IS FOR EDUCATION PURPOSE ONLY, DO NOT RUN IT WITHOUT PERMISSION!**
 **I AM NOT RESPONSIBLE FOR ANY DAMAGED CAUSED BY THE ILLEGAL USAGE OF THIS PROGRAM**
 
-
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FHugoLB0%2FRansom0.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FHugoLB0%2FRansom0?ref=badge_large)
