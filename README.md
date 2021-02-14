@@ -67,7 +67,7 @@ This Program have been test on:
 
  - **Windows 10**
  - **Mac OS Catalina 10.15.6 (19G73)**
- - **Mac OS Big Sur 11.1 (20C69)**
+ - **Mac OS Big Sur 11.2.1 (20D74)**
 
 ## DISCLAIMER 
 **THIS PROJECT IS FOR EDUCATION PURPOSE ONLY, DO NOT RUN IT WITHOUT PERMISSION!**
