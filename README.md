@@ -3,6 +3,7 @@
 
 <p align="center">
  <img src='https://api.travis-ci.com/hugolb0/ransom0.svg?branch=master'>
+ <img src='https://img.shields.io/badge/Windows%2C%20Mac%20%26%20Linux-compatible-brightgreen'>
  <img src='https://img.shields.io/github/release-date/HugoLB0/Ransom0'>
  <img src='https://img.shields.io/github/commit-activity/m/HugoLB0/Ransom0'>
  <img src='https://img.shields.io/github/last-commit/HugoLB0/Ransom0'>
