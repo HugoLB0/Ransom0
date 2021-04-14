@@ -1,10 +1,11 @@
 import ast
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from pyngrok import ngrok
+from pyngrok import ngrok, conf
 import sqlite3
 from sqlite3 import Error
 
 
+conf.get_default().auth_token = "<NGROK_AUTH_TOKEN"  #change this here, loggin to https://dashboard.ngrok.com/ and get your key.
 database = r"database.db"
 
 sql_create_table = """ CREATE TABLE IF NOT EXISTS CLIENT (
@@ -111,6 +112,7 @@ def run(server_class=HTTPServer, handler_class=S, addr="localhost", port=8000):
         print(f"Starting httpd server on {url}")
         print()
         httpd.serve_forever()
+        ngrok_tunnel = ngrok.connect()  
     except KeyboardInterrupt:
         httpd.__exit__()
         print("SERVER IS OFFLINE")
