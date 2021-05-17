@@ -72,7 +72,10 @@ This Program have been test on:
 
 ## Any donation are welcome
 Donations are welcome, it'll really help me to continue to maintain this project :)
+
 BTC wallet: 3Fys3VXjdQuxtbMLQ8Wzm9DtV8kWi9VDek
+<br>
+[![Donatecoins](http://donatecoins.org/btc/3Fys3VXjdQuxtbMLQ8Wzm9DtV8kWi9VDek.svg)](http://donatecoins.org/btc/3Fys3VXjdQuxtbMLQ8Wzm9DtV8kWi9VDek)
 
 ## DISCLAIMER 
 **THIS PROJECT IS FOR EDUCATION PURPOSE ONLY, DO NOT RUN IT WITHOUT PERMISSION!**
