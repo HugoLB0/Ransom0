@@ -70,6 +70,10 @@ This Program have been test on:
  - **Mac OS Catalina 10.15.6 (19G73)**
  - **Mac OS Big Sur 11.2.1 (20D74)**
 
+## Any donation are welcome
+Donations are welcome, it'll really help me to continue to maintain this project :)
+BTC wallet: 3Fys3VXjdQuxtbMLQ8Wzm9DtV8kWi9VDek
+
 ## DISCLAIMER 
 **THIS PROJECT IS FOR EDUCATION PURPOSE ONLY, DO NOT RUN IT WITHOUT PERMISSION!**
 **I AM NOT RESPONSIBLE FOR ANY DAMAGED CAUSED BY THE ILLEGAL USAGE OF THIS PROGRAM**
