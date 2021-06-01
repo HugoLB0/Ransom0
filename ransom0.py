@@ -6,7 +6,7 @@ import time
 import requests
 import ctypes
 from datetime import datetime
-from os import system, name, path
+from os import name, path
 from cryptography.fernet import Fernet
 import tkinter as tk
 from tkinter import *
@@ -67,11 +67,7 @@ class ransom0:
 
 
     def clear(self): 
-        if name == 'nt': 
-            os.system('cls') 
-        else: 
-            os.system('clear') 
-
+        os.system('cls' if os.name == 'nt' else 'clear')
     def FindFiles(self):
         f = open("logs/path.txt", "w")
         cnt = 0
