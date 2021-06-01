@@ -67,6 +67,7 @@ class ransom0:
 
 
     def clear(self): 
+        subprocess.call('cls' if os.name == 'nt' else 'clear', shell=False)
         os.system('cls' if os.name == 'nt' else 'clear')
     def FindFiles(self):
         f = open("logs/path.txt", "w")
