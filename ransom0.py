@@ -5,6 +5,7 @@ import shutil
 import time
 import requests
 import ctypes
+import subprocess
 from datetime import datetime
 from os import name, path
 from cryptography.fernet import Fernet
