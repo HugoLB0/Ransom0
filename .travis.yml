@@ -1,4 +1,4 @@
-os: windows
+
 language: python
 python:
   - "3.8.7"
