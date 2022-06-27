@@ -73,9 +73,8 @@ This Program have been test on:
 
 ## Any donation are welcome
 Donations are welcome, it'll really help me to continue to maintain this project :)
-[![Donate with Bitcoin](https://en.cryptobadges.io/badge/big/1Bw82zC5FnVtw93ZrcALQTeZBXgtVWH75n)](https://en.cryptobadges.io/badge/big/1Bw82zC5FnVtw93ZrcALQTeZBXgtVWH75n)
+[![Donate with Bitcoin](https://en.cryptobadges.io/badge/big/1DsjWmS2auGMyxB2vbryjqo7GGCdP7CrbC?showBalance=true)](https://en.cryptobadges.io/donate/1DsjWmS2auGMyxB2vbryjqo7GGCdP7CrbC)
 
-[![Donate with Ethereum](https://en.cryptobadges.io/badge/big/0x71b163e2fc5b2c10cd8cf0a2cc8917db6db57326)](https://en.cryptobadges.io/badge/big/0x71b163e2fc5b2c10cd8cf0a2cc8917db6db57326)
 
 
 ## DISCLAIMER 
