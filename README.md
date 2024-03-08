@@ -79,9 +79,9 @@ Donations are welcome, it'll really help me to continue to maintain this project
 
 ## DISCLAIMER 
 **THIS PROJECT IS FOR EDUCATION PURPOSE ONLY, DO NOT RUN IT WITHOUT PERMISSION!**
-**I AM NOT RESPONSIBLE FOR ANY DAMAGED CAUSED BY THE ILLEGAL USAGE OF THIS PROGRAM**
-**THE ENCRYPTION FUNCTION HAS BEEN REMOVED FOR LEGAL ISSUE**
-**if you want the full version, please contact me with a pro mail adress and provide a reason**
+**I AM NOT RESPONSIBLE FOR ANY DAMAGED CAUSED BY THE ILLEGAL USAGE OF THIS PROGRAM.**
+**THE ENCRYPTION FUNCTION HAS BEEN REMOVED FOR LEGAL ISSUE.**
+**if you want the full version, please contact me with a university/academic mail adress and provide a reason**
 
 ## Stargazers
  [![Stargazers repo roster for @USERNAME/REPO_NAME](https://reporoster.com/stars/HugoLB0/Ransom0)](https://github.com/HugoLB0/Ransom0/stargazers)
